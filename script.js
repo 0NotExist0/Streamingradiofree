@@ -6,9 +6,18 @@ const stopBtn = document.getElementById('stopBtn');
 const volumeCtrl = document.getElementById('volumeCtrl');
 const statusDisplay = document.getElementById('statusDisplay');
 
-// Nuovi riferimenti per il database
 const stationNameInput = document.getElementById('stationName');
 const saveDbBtn = document.getElementById('saveDbBtn');
+const savedRadiosContainer = document.getElementById('savedRadiosContainer');
+
+// ==========================================
+// CONFIGURAZIONE DATABASE SUPABASE
+// ==========================================
+const SUPABASE_PROJECT_URL = 'https://wwlqjdkgkkguqetzvyss.supabase.co';
+// Utilizziamo il nome esatto della tua tabella
+const SUPABASE_API_ENDPOINT = `${SUPABASE_PROJECT_URL}/rest/v1/Rsf`;
+// La tua chiave API
+const SUPABASE_ANON_KEY = 'Sb_publishable_aQem0LT4Xh7tWJ1yrmzMmQ_xwFxbnS-';
 
 /**
  * Avvia la riproduzione dello stream recuperando l'URL dall'input.
@@ -63,71 +72,133 @@ function updateStatus(message, color) {
 }
 
 /**
- * METODO COMPLETO PER API INFERENCE VERSO DATABASE OPEN-SOURCE (Supabase)
- * Prepara un JSON e lo invia tramite metodo POST.
+ * METODO COMPLETO: POST
+ * Salva il link e il nome nel database Supabase.
  */
 async function saveLinkToDatabase() {
     const streamUrl = streamUrlInput.value.trim();
     const stationName = stationNameInput.value.trim();
 
-    // Validazione input
     if (streamUrl === "" || stationName === "") {
         updateStatus("Errore: Inserisci URL e Nome della radio prima di salvare.", "#e22134");
         return;
     }
 
-    /* * CONFIGURAZIONE API SUPABASE
-     * Sostituisci questi valori con quelli del tuo progetto Supabase reale.
-     * 'radio_links' è il nome della tabella che devi creare nel database.
-     */
-    const SUPABASE_PROJECT_URL = 'https://TUO-PROGETTO.supabase.co';
-    const SUPABASE_API_ENDPOINT = `${SUPABASE_PROJECT_URL}/rest/v1/radio_links`;
-    const SUPABASE_ANON_KEY = 'LA-TUA-CHIAVE-ANONIMA-PUBBLICA';
-
-    // Struttura del dato JSON da inviare al DB
+    // IMPORTANTE: Le colonne su Supabase devono chiamarsi "name" e "url" tutte in minuscolo
     const dataPayload = {
         name: stationName,
-        url: streamUrl,
-        created_at: new Date().toISOString()
+        url: streamUrl
     };
 
     try {
         updateStatus("Salvataggio in corso...", "#b3b3b3");
         saveDbBtn.disabled = true;
 
-        // Chiamata REST via Fetch API
         const response = await fetch(SUPABASE_API_ENDPOINT, {
-            method: 'POST', // Usiamo POST per creare un nuovo record
+            method: 'POST',
             headers: {
                 'apikey': SUPABASE_ANON_KEY,
                 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
                 'Content-Type': 'application/json',
-                'Prefer': 'return=minimal' // Richiede al server di non restituire l'intero oggetto creato per risparmiare banda
+                'Prefer': 'return=minimal'
             },
             body: JSON.stringify(dataPayload)
         });
 
         if (!response.ok) {
-            // Se la risposta non è nel range 200-299, lanciamo un'eccezione
-            throw new Error(`Errore Server: ${response.status} - ${response.statusText}`);
+            throw new Error(`Errore Server: ${response.status} - Controlla i nomi delle colonne`);
         }
 
         updateStatus(`"${stationName}" salvata nel Database!`, "#1db954");
-        stationNameInput.value = ""; // Pulisce l'input del nome
+        stationNameInput.value = ""; 
+        
+        // Ricarica la lista per mostrare subito il nuovo bottone
+        loadSavedRadios();
 
     } catch (error) {
         console.error("Errore API Database:", error);
-        updateStatus("Errore nel salvataggio. Controlla la console per i dettagli.", "#e22134");
+        updateStatus("Errore nel salvataggio. Le colonne su Supabase sono in minuscolo?", "#e22134");
     } finally {
         saveDbBtn.disabled = false;
     }
 }
 
-// Assegnazione degli Event Listener
+/**
+ * METODO COMPLETO: GET
+ * Recupera tutte le radio salvate nel database Supabase e crea i bottoni.
+ */
+async function loadSavedRadios() {
+    try {
+        const response = await fetch(`${SUPABASE_API_ENDPOINT}?select=*`, {
+            method: 'GET',
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Errore Server: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Svuota il contenitore prima di riempirlo di nuovo
+        savedRadiosContainer.innerHTML = "";
+
+        if (data.length === 0) {
+            savedRadiosContainer.innerHTML = "<p style='color: #b3b3b3; font-size: 13px;'>Nessuna radio salvata al momento.</p>";
+            return;
+        }
+
+        // Crea un bottone per ogni radio ricevuta dal DB
+        data.forEach(radio => {
+            const btn = document.createElement('button');
+            
+            // Gestisce un fallback in caso tu abbia lasciato i nomi delle colonne maiuscoli
+            const radioName = radio.name || radio.Nome || "Radio Sconosciuta";
+            const radioUrl = radio.url || radio.Url || "";
+
+            btn.textContent = `📻 Ascolta ${radioName}`;
+            btn.style.backgroundColor = "#282828";
+            btn.style.color = "white";
+            btn.style.width = "100%";
+            btn.style.textAlign = "left";
+            btn.style.border = "1px solid #333";
+            btn.style.marginTop = "8px";
+            btn.style.padding = "10px";
+            btn.style.cursor = "pointer";
+            btn.style.borderRadius = "6px";
+            btn.style.transition = "background-color 0.2s";
+
+            btn.onmouseover = () => btn.style.backgroundColor = "#3e3e3e";
+            btn.onmouseout = () => btn.style.backgroundColor = "#282828";
+            
+            // Quando clicchi il bottone, inserisce l'URL nell'input e fa Play
+            btn.addEventListener('click', () => {
+                streamUrlInput.value = radioUrl;
+                playStream();
+            });
+
+            savedRadiosContainer.appendChild(btn);
+        });
+
+    } catch (error) {
+        console.error("Errore nel caricamento delle radio:", error);
+        savedRadiosContainer.innerHTML = "<p style='color: #e22134; font-size: 13px;'>Errore di connessione al database.</p>";
+    }
+}
+
+// ==========================================
+// ASSEGNAZIONE EVENT LISTENER E INIZIALIZZAZIONE
+// ==========================================
 playBtn.addEventListener('click', playStream);
 stopBtn.addEventListener('click', stopStream);
 volumeCtrl.addEventListener('input', updateVolume);
 saveDbBtn.addEventListener('click', saveLinkToDatabase);
 
-// Inizializza il volume corrente all'avvio
+// Imposta il volume all'avvio
 updateVolume();
+// Recupera le radio dal database non appena si apre la pagina
+loadSavedRadios();
