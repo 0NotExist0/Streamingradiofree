@@ -1,43 +1,43 @@
 :root {
-    --bg-color: #050505;
-    --panel-bg: #0d1117;
-    --border-color: #1f2937;
-    --accent-cyan: #00f0ff;
-    --accent-red: #ff003c;
-    --text-main: #e5e7eb;
-    --text-muted: #6b7280;
-    --font-mono: 'Courier New', Courier, monospace;
+    --space-bg: #0b071a; /* Viola profondo */
+    --panel-bg: rgba(26, 11, 46, 0.7);
+    --milano-orange: #ff8800;
+    --holo-cyan: #00e5ff;
+    --void-red: #ff2a6d;
+    --text-glow: #d8f8ff;
+    --font-sci: 'Arial', sans-serif;
 }
 
 body {
     margin: 0;
-    font-family: var(--font-mono);
-    background-color: var(--bg-color);
-    background-image: linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
-    color: var(--text-main);
+    font-family: var(--font-sci);
+    background: radial-gradient(circle at center, #1b0c38 0%, #05020a 100%);
+    color: var(--text-glow);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    letter-spacing: 1px;
 }
 
-.terminal-container {
-    background-color: var(--panel-bg);
-    border: 1px solid var(--border-color);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.5);
+.space-console {
+    background: var(--panel-bg);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 20px rgba(255, 136, 0, 0.05);
     width: 100%;
-    max-width: 500px;
-    height: 90vh;
+    max-width: 450px;
+    height: 92vh;
     display: flex;
     flex-direction: column;
+    /* Angoli tagliati in stile astronave */
+    clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
 }
 
-.terminal-header {
-    background: linear-gradient(90deg, #111827 0%, #0d1117 100%);
-    border-bottom: 2px solid var(--accent-cyan);
+.holo-header {
+    background: linear-gradient(90deg, rgba(255,136,0,0.2) 0%, transparent 100%);
+    border-bottom: 2px solid var(--milano-orange);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
@@ -46,106 +46,105 @@ body {
 
 h1, h2 {
     margin: 0;
-    color: var(--accent-cyan);
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    color: var(--milano-orange);
+    text-shadow: 0 0 8px rgba(255, 136, 0, 0.6);
+    font-weight: 900;
 }
 
-h1 { font-size: 18px; }
-h2 { font-size: 14px; margin-bottom: 15px; }
+h1 { font-size: 16px; }
+h2 { font-size: 12px; margin-bottom: 12px; color: var(--holo-cyan); text-shadow: 0 0 8px rgba(0, 229, 255, 0.6); }
 
-.status-indicator {
-    width: 10px;
-    height: 10px;
-    background-color: var(--accent-cyan);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent-cyan);
-    animation: blink 2s infinite;
+.star-tracker {
+    width: 12px;
+    height: 12px;
+    background-color: var(--holo-cyan);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    box-shadow: 0 0 15px var(--holo-cyan);
+    animation: pulse 1.5s infinite alternate;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+@keyframes pulse {
+    from { transform: scale(0.8); opacity: 0.5; }
+    to { transform: scale(1.2); opacity: 1; }
 }
 
-.panel {
+.holo-panel {
     padding: 20px;
-    border-bottom: 1px dashed var(--border-color);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
 }
 
 .input-group label {
     display: block;
-    font-size: 12px;
-    color: var(--text-muted);
+    font-size: 10px;
+    color: var(--holo-cyan);
     margin-bottom: 5px;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 10px;
-    background-color: #000;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    font-family: var(--font-mono);
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--milano-orange);
+    color: #fff;
     box-sizing: border-box;
     outline: none;
-    transition: border-color 0.3s;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    transition: all 0.3s;
 }
 
 input[type="text"]:focus {
-    border-color: var(--accent-cyan);
-    box-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
+    background-color: rgba(255, 136, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 136, 0, 0.4);
 }
 
 .controls {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     margin-top: 15px;
 }
 
 button {
     flex: 1;
-    padding: 10px;
-    font-family: var(--font-mono);
-    font-weight: bold;
-    text-transform: uppercase;
+    padding: 12px;
+    font-weight: 900;
+    letter-spacing: 1px;
     cursor: pointer;
     border: none;
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
     transition: all 0.2s;
 }
 
-.btn-primary {
-    background-color: rgba(0, 240, 255, 0.1);
-    color: var(--accent-cyan);
-    border: 1px solid var(--accent-cyan);
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-cyan);
+.btn-ravager {
+    background-color: var(--milano-orange);
     color: #000;
-    box-shadow: 0 0 15px var(--accent-cyan);
 }
 
-.btn-danger {
-    background-color: rgba(255, 0, 60, 0.1);
-    color: var(--accent-red);
-    border: 1px solid var(--accent-red);
+.btn-ravager:hover {
+    background-color: #ff9d2e;
+    box-shadow: 0 0 20px var(--milano-orange);
+    transform: scale(1.02);
 }
 
-.btn-danger:hover {
-    background-color: var(--accent-red);
-    color: #000;
-    box-shadow: 0 0 15px var(--accent-red);
+.btn-void {
+    background-color: transparent;
+    color: var(--void-red);
+    border: 2px solid var(--void-red);
 }
 
-.btn-secondary {
+.btn-void:hover {
+    background-color: rgba(255, 42, 109, 0.2);
+    box-shadow: 0 0 15px var(--void-red);
+}
+
+.btn-nova {
     width: 100%;
-    background-color: #1f2937;
-    color: white;
+    background-color: var(--holo-cyan);
+    color: #000;
 }
 
-.btn-secondary:hover {
-    background-color: #374151;
+.btn-nova:hover {
+    background-color: #4df0ff;
+    box-shadow: 0 0 20px var(--holo-cyan);
 }
 
 .volume-container {
@@ -157,19 +156,19 @@ button {
 
 input[type="range"] {
     flex-grow: 1;
-    accent-color: var(--accent-cyan);
+    accent-color: var(--holo-cyan);
 }
 
 .status-bar {
     margin-top: 15px;
     padding: 10px;
-    background-color: #000;
-    border-left: 3px solid var(--accent-cyan);
-    font-size: 12px;
-    word-break: break-all;
+    background: rgba(0,0,0,0.6);
+    border-left: 3px solid var(--milano-orange);
+    font-size: 11px;
+    color: var(--holo-cyan);
 }
 
-/* --- THE DRAWER (FASCICOLI) --- */
+/* --- THE HOLO DRAWER --- */
 .drawer-section {
     padding: 20px;
     flex-grow: 1;
@@ -178,81 +177,75 @@ input[type="range"] {
     overflow: hidden;
 }
 
-.file-drawer {
+.holo-drawer {
     flex-grow: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding-right: 10px;
+    gap: 10px;
+    padding-right: 5px;
 }
 
-/* Custom Scrollbar for the drawer */
-.file-drawer::-webkit-scrollbar { width: 6px; }
-.file-drawer::-webkit-scrollbar-track { background: #000; }
-.file-drawer::-webkit-scrollbar-thumb { background: var(--border-color); }
-.file-drawer::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+.holo-drawer::-webkit-scrollbar { width: 4px; }
+.holo-drawer::-webkit-scrollbar-track { background: transparent; }
+.holo-drawer::-webkit-scrollbar-thumb { background: var(--milano-orange); }
 
 .file-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(90deg, #161b22 0%, #0d1117 100%);
-    border: 1px solid var(--border-color);
-    border-left: 4px solid var(--text-muted);
-    padding: 10px 15px;
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.1) 0%, transparent 100%);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-left: 3px solid var(--holo-cyan);
+    padding: 12px 15px;
     cursor: pointer;
-    transition: all 0.2s ease-out;
-    /* Animazione iniziale nascosta */
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
     opacity: 0;
-    transform: translateX(-20px);
-    animation: slideIn 0.4s forwards;
+    transform: translateY(15px);
+    animation: warpIn 0.4s forwards ease-out;
+    transition: all 0.2s;
 }
 
-@keyframes slideIn {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+@keyframes warpIn {
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .file-card:hover {
-    transform: translateX(10px); /* L'effetto "estrazione" dal cassetto */
-    border-left-color: var(--accent-cyan);
-    background: linear-gradient(90deg, #1f2937 0%, #0d1117 100%);
-    box-shadow: -5px 0 15px rgba(0, 240, 255, 0.1);
+    background: linear-gradient(90deg, rgba(255, 136, 0, 0.2) 0%, transparent 100%);
+    border-left-color: var(--milano-orange);
+    border-color: rgba(255, 136, 0, 0.5);
+    transform: translateX(8px);
 }
 
 .file-info {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    pointer-events: none; /* Fa sì che il click vada alla card */
+    gap: 2px;
+    pointer-events: none;
 }
 
 .file-name {
-    font-weight: bold;
+    font-weight: 900;
     color: #fff;
-    font-size: 14px;
+    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .file-id {
-    font-size: 10px;
-    color: var(--text-muted);
+    font-size: 9px;
+    color: var(--holo-cyan);
 }
 
 .delete-btn {
     flex: 0 0 auto;
     background: transparent;
-    color: var(--text-muted);
-    border: 1px solid transparent;
-    padding: 5px 10px;
-    font-size: 12px;
+    color: var(--void-red);
+    padding: 6px 10px;
+    font-size: 10px;
 }
 
 .delete-btn:hover {
-    color: var(--accent-red);
-    border-color: var(--accent-red);
-    background-color: rgba(255, 0, 60, 0.1);
-    box-shadow: 0 0 10px var(--accent-red);
+    background-color: var(--void-red);
+    color: #fff;
+    box-shadow: 0 0 10px var(--void-red);
 }
