@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio Stream Player</title>
+    <title>Radio Stream Player & Manager</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,6 +28,19 @@
         <div class="status-bar" id="statusDisplay">Pronto all'ascolto. Inserisci un link.</div>
         
         <audio id="audioElement" preload="none"></audio>
+
+        <div class="database-section" style="margin-top: 25px; border-top: 1px solid #333; padding-top: 20px;">
+            <h2 style="font-size: 16px; margin-bottom: 15px; margin-top: 0; color: #ffffff;">Salva la tua Radio preferita</h2>
+            
+            <div class="input-group">
+                <input type="text" id="stationName" placeholder="Nome della radio (es. Hip Hop FM)..." style="margin-bottom: 10px;">
+                <button id="saveDbBtn" style="width: 100%; background-color: #3b82f6; color: white;">Salva nel Database</button>
+            </div>
+        </div>
+
+        <div id="savedRadiosContainer" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+            </div>
+
     </div>
 
     <script src="script.js"></script>
