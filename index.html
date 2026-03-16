@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio Stream Player & Manager</title>
+    <title>SECURE RADIO TERMINAL</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="player-container">
-        <h1>Live Stream Player</h1>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <h1>// N.C.P.D. AUDIO ARCHIVE_</h1>
+            <div class="status-indicator"></div>
+        </div>
         
-        <div class="input-group">
-            <input type="text" id="streamUrl" placeholder="Incolla l'URL dello stream (es. .mp3, .aac)...">
-        </div>
-
-        <div class="controls">
-            <button id="playBtn">Play</button>
-            <button id="stopBtn">Stop</button>
-        </div>
-
-        <div class="volume-container">
-            <span>Volume</span>
-            <input type="range" id="volumeCtrl" min="0" max="1" step="0.05" value="0.5">
-        </div>
-
-        <div class="status-bar" id="statusDisplay">Pronto all'ascolto. Inserisci un link.</div>
-        
-        <audio id="audioElement" preload="none"></audio>
-
-        <div class="database-section" style="margin-top: 25px; border-top: 1px solid #333; padding-top: 20px;">
-            <h2 style="font-size: 16px; margin-bottom: 15px; margin-top: 0; color: #ffffff;">Salva la tua Radio preferita</h2>
-            
+        <div class="panel">
             <div class="input-group">
-                <input type="text" id="stationName" placeholder="Nome della radio (es. Hip Hop FM)..." style="margin-bottom: 10px;">
-                <button id="saveDbBtn" style="width: 100%; background-color: #3b82f6; color: white;">Salva nel Database</button>
+                <label>STREAM_URL:</label>
+                <input type="text" id="streamUrl" placeholder="Inserisci indirizzo stream protetto...">
             </div>
+
+            <div class="controls">
+                <button id="playBtn" class="btn-primary">INITIATE_PLAY</button>
+                <button id="stopBtn" class="btn-danger">ABORT</button>
+            </div>
+
+            <div class="volume-container">
+                <label>SYS_VOL:</label>
+                <input type="range" id="volumeCtrl" min="0" max="1" step="0.05" value="0.5">
+            </div>
+
+            <div class="status-bar" id="statusDisplay">SYSTEM READY. AWAITING INPUT.</div>
+            <audio id="audioElement" preload="none"></audio>
         </div>
 
-        <div id="savedRadiosContainer" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+        <div class="panel">
+            <h2>// NEW_ENTRY_</h2>
+            <div class="input-group">
+                <label>FILE_NAME:</label>
+                <input type="text" id="stationName" placeholder="Identificativo stream...">
             </div>
+            <button id="saveDbBtn" class="btn-secondary">UPLOAD_TO_MAINFRAME</button>
+        </div>
 
+        <div class="drawer-section">
+            <h2>// SECURE_FILES_DRAWER</h2>
+            <div id="savedRadiosContainer" class="file-drawer">
+                </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
