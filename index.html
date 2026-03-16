@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Stream Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="player-container">
+        <h1>Live Stream Player</h1>
+        
+        <div class="input-group">
+            <input type="text" id="streamUrl" placeholder="Incolla l'URL dello stream (es. .mp3, .aac)...">
+        </div>
+
+        <div class="controls">
+            <button id="playBtn">Play</button>
+            <button id="stopBtn">Stop</button>
+        </div>
+
+        <div class="volume-container">
+            <span>Volume</span>
+            <input type="range" id="volumeCtrl" min="0" max="1" step="0.05" value="0.5">
+        </div>
+
+        <div class="status-bar" id="statusDisplay">Pronto all'ascolto. Inserisci un link.</div>
+        
+        <audio id="audioElement" preload="none"></audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
