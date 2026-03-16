@@ -3,49 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SECURE RADIO TERMINAL</title>
+    <title>Milano Holo-Player</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="terminal-container">
-        <div class="terminal-header">
-            <h1>// N.C.P.D. AUDIO ARCHIVE_</h1>
-            <div class="status-indicator"></div>
+    <div class="space-console">
+        <div class="holo-header">
+            <h1>✧ MILANO DECK AUDIO ✧</h1>
+            <div class="star-tracker"></div>
         </div>
         
-        <div class="panel">
+        <div class="holo-panel">
             <div class="input-group">
-                <label>STREAM_URL:</label>
-                <input type="text" id="streamUrl" placeholder="Inserisci indirizzo stream protetto...">
+                <label>⟪ FREQUENCY_LINK ⟫</label>
+                <input type="text" id="streamUrl" placeholder="Inserisci coordinate audio...">
             </div>
 
             <div class="controls">
-                <button id="playBtn" class="btn-primary">INITIATE_PLAY</button>
-                <button id="stopBtn" class="btn-danger">ABORT</button>
+                <button id="playBtn" class="btn-ravager">IGNITE</button>
+                <button id="stopBtn" class="btn-void">CUT OFF</button>
             </div>
 
             <div class="volume-container">
-                <label>SYS_VOL:</label>
+                <label>⟪ BOOST ⟫</label>
                 <input type="range" id="volumeCtrl" min="0" max="1" step="0.05" value="0.5">
             </div>
 
-            <div class="status-bar" id="statusDisplay">SYSTEM READY. AWAITING INPUT.</div>
+            <div class="status-bar" id="statusDisplay">AWAITING TRANSMISSION...</div>
             <audio id="audioElement" preload="none"></audio>
         </div>
 
-        <div class="panel">
-            <h2>// NEW_ENTRY_</h2>
+        <div class="holo-panel">
+            <h2>✧ ADD_WAYPOINT ✧</h2>
             <div class="input-group">
-                <label>FILE_NAME:</label>
-                <input type="text" id="stationName" placeholder="Identificativo stream...">
+                <label>⟪ TRACK_NAME ⟫</label>
+                <input type="text" id="stationName" placeholder="Nome frequenza spaziale...">
             </div>
-            <button id="saveDbBtn" class="btn-secondary">UPLOAD_TO_MAINFRAME</button>
+            <button id="saveDbBtn" class="btn-nova">SAVE TO GALAXY DRIVE</button>
         </div>
 
         <div class="drawer-section">
-            <h2>// SECURE_FILES_DRAWER</h2>
-            <div id="savedRadiosContainer" class="file-drawer">
+            <h2>✧ SAVED_FREQUENCIES ✧</h2>
+            <div id="savedRadiosContainer" class="holo-drawer">
                 </div>
         </div>
     </div>
