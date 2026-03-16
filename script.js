@@ -14,10 +14,10 @@ const savedRadiosContainer = document.getElementById('savedRadiosContainer');
 // CONFIGURAZIONE DATABASE SUPABASE
 // ==========================================
 const SUPABASE_PROJECT_URL = 'https://wwlqjdkgkkguqetzvyss.supabase.co';
-// Utilizziamo il nome esatto della tua tabella
 const SUPABASE_API_ENDPOINT = `${SUPABASE_PROJECT_URL}/rest/v1/Rsf`;
-// La tua chiave API
-const SUPABASE_ANON_KEY = 'Sb_publishable_aQem0LT4Xh7tWJ1yrmzMmQ_xwFxbnS-';
+
+// La tua chiave corretta con la "e" minuscola iniziale
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind3bHFqZGtna2tndXFldHp2eXNzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2NDc4MDUsImV4cCI6MjA4OTIyMzgwNX0.WTNvKyYRSdcAO8m_GklxSoLq8l8uwbvxk3YtBDxHhWM';
 
 /**
  * Avvia la riproduzione dello stream recuperando l'URL dall'input.
@@ -84,7 +84,6 @@ async function saveLinkToDatabase() {
         return;
     }
 
-    // IMPORTANTE: Le colonne su Supabase devono chiamarsi "name" e "url" tutte in minuscolo
     const dataPayload = {
         name: stationName,
         url: streamUrl
@@ -106,7 +105,7 @@ async function saveLinkToDatabase() {
         });
 
         if (!response.ok) {
-            throw new Error(`Errore Server: ${response.status} - Controlla i nomi delle colonne`);
+            throw new Error(`Errore Server: ${response.status}`);
         }
 
         updateStatus(`"${stationName}" salvata nel Database!`, "#1db954");
@@ -117,7 +116,7 @@ async function saveLinkToDatabase() {
 
     } catch (error) {
         console.error("Errore API Database:", error);
-        updateStatus("Errore nel salvataggio. Le colonne su Supabase sono in minuscolo?", "#e22134");
+        updateStatus("Errore nel salvataggio. Controlla la console.", "#e22134");
     } finally {
         saveDbBtn.disabled = false;
     }
@@ -156,7 +155,6 @@ async function loadSavedRadios() {
         data.forEach(radio => {
             const btn = document.createElement('button');
             
-            // Gestisce un fallback in caso tu abbia lasciato i nomi delle colonne maiuscoli
             const radioName = radio.name || radio.Nome || "Radio Sconosciuta";
             const radioUrl = radio.url || radio.Url || "";
 
