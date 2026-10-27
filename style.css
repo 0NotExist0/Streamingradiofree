@@ -12,3 +12,37 @@ html, body {
 main {
   text-align: center;
 }
+
+.controls {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.controls button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #eee;
+  background: #333;
+  border: 2px solid #666;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.05s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.controls button:hover {
+  border-color: #aaa;
+}
+
+.controls button:active {
+  transform: scale(0.95);
+  background: #444;
+}
+
+.controls button:focus-visible {
+  outline: 2px solid #ffb74d;
+  outline-offset: 2px;
+}
