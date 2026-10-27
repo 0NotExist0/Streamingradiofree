@@ -46,3 +46,99 @@ main {
   outline: 2px solid #ffb74d;
   outline-offset: 2px;
 }
+
+#waveform {
+  display: block;
+  margin: 1.5rem auto;
+  background: #0a0a0a;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 183, 77, 0.15);
+}
+
+.panel {
+  margin: 1.5rem auto;
+  max-width: 720px;
+  padding: 1rem;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 183, 77, 0.1);
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.row label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: #ccc;
+  min-width: 90px;
+}
+
+.row label select,
+.row label input[type="range"] {
+  width: 100%;
+  background: #222;
+  border: 1px solid #444;
+  color: #eee;
+  border-radius: 6px;
+  padding: 0.35rem;
+  cursor: pointer;
+}
+
+.row label input[type="range"] {
+  appearance: none;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  outline: none;
+}
+
+.row label input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ffb74d;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.row.keys {
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.row.keys button {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  background: #2a2a2a;
+  border: 1px solid #444;
+  color: #eee;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.row.keys button:hover {
+  border-color: #ffb74d;
+  background: #333;
+}
+
+.row.keys button:active {
+  background: #ffb74d;
+  color: #111;
+}
+
+@media (max-width: 600px) {
+  #waveform { width: 90vw; height: 80px; }
+  .panel { padding: 0.75rem; margin: 1rem; }
+  .row { gap: 0.6rem; }
+  .row label { min-width: unset; }
+}

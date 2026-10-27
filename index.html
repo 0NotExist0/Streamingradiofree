@@ -10,6 +10,38 @@
   <main>
     <h1>Khorg</h1>
     <p>Fai musica come se avessi una Khorg.</p>
+
+    <canvas id="waveform" width="700" height="140" aria-label="Onda musicale"></canvas>
+
+    <section class="panel" aria-label="Comandi sintetizzatore">
+      <div class="row">
+        <label>Onda <select id="wave-type"><option value="sine">Sine</option><option value="square">Square</option><option value="sawtooth">Sawtooth</option><option value="triangle">Triangle</option></select></label>
+        <label>Frequenza <input type="range" id="freq" min="20" max="2000" step="1" value="220"></label>
+        <label>Volume <input type="range" id="master-vol" min="0" max="1" step="0.01" value="0.5"></label>
+      </div>
+      <div class="row">
+        <label>Attack <input type="range" id="env-attack" min="0.001" max="1" step="0.001" value="0.01"></label>
+        <label>Decay <input type="range" id="env-decay" min="0.001" max="1" step="0.001" value="0.1"></label>
+        <label>Sustain <input type="range" id="env-sustain" min="0" max="1" step="0.01" value="0.3"></label>
+        <label>Release <input type="range" id="env-release" min="0.001" max="2" step="0.001" value="0.2"></label>
+      </div>
+      <div class="row">
+        <label>Filtro <select id="filter-type"><option value="none">Nessuno</option><option value="lowpass">Lowpass</option><option value="highpass">Highpass</option><option value="bandpass">Bandpass</option></select></label>
+        <label>Cutoff <input type="range" id="filter-freq" min="40" max="2000" step="1" value="1000"></label>
+        <label>Q <input type="range" id="filter-q" min="0.1" max="20" step="0.1" value="1"></label>
+      </div>
+      <div class="row keys" aria-label="Tasti">
+        <button data-note="C4">Do</button>
+        <button data-note="D4">Re</button>
+        <button data-note="E4">Mi</button>
+        <button data-note="F4">Fa</button>
+        <button data-note="G4">Sol</button>
+        <button data-note="A4">La</button>
+        <button data-note="B4">Si</button>
+        <button data-note="C5">Do</button>
+      </div>
+    </section>
+
     <div class="controls" aria-label="Aggiungi suoni">
       <button type="button" data-sound="kick">Kick</button>
       <button type="button" data-sound="hats">Hats</button>
