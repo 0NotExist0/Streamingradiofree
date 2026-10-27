@@ -1,16 +1,39 @@
 html, body {
   margin: 0;
   height: 100%;
-  background: #111;
+  background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
   color: #eee;
-  font-family: system-ui, sans-serif;
+  font-family: 'Segoe UI', system-ui, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 40% at 50% 30%, rgba(255,183,77,0.06), transparent 60%),
+              repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 main {
+  position: relative;
+  z-index: 1;
   text-align: center;
+  display: inline-block;
+  padding: 1.5rem 1rem;
+  background: #2a2a2a;
+  border: 3px solid #444;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.6),
+    0 20px 40px rgba(0,0,0,0.5),
+    inset 0 0 20px rgba(255,183,77,0.08);
+  background: linear-gradient(145deg, #2b2b2b 0%, #1e1e1e 100%);
 }
 
 .controls {
@@ -43,6 +66,45 @@ main {
 }
 
 .controls button:focus-visible {
+  outline: 2px solid #ffb74d;
+  outline-offset: 2px;
+}
+
+.sound-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loop {
+  padding: 0.6rem 1.1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #eee;
+  background: #2a2a2a;
+  border: 2px solid #444;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.loop:hover {
+  border-color: #aaa;
+}
+
+.loop:active {
+  transform: scale(0.95);
+  background: #444;
+}
+
+.loop.active {
+  background: #ffb74d;
+  color: #111;
+  border-color: #ffb74d;
+  box-shadow: 0 0 12px rgba(255, 183, 77, 0.35);
+}
+
+.loop:focus-visible {
   outline: 2px solid #ffb74d;
   outline-offset: 2px;
 }
@@ -136,9 +198,163 @@ main {
   color: #111;
 }
 
+/* ===== LED DI STATO HARDWARE ===== */
+.led {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  margin-left: 0.4rem;
+  box-shadow: 0 0 4px rgba(0,0,0,0.6);
+}
+.led.amber { background: #ffb74d; box-shadow: 0 0 8px #ffb74d; }
+.led.red { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
+.led.green { background: #44ff44; box-shadow: 0 0 8px #44ff44; }
+.led.off { opacity: 0.25; }
+
+/* ===== PULSANTI SEQUENCER HARDWARE ===== */
+#tap-tempo, #seq-play {
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #eee;
+  background: #2a2a2a;
+  border: 2px solid #555;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+#tap-tempo:hover, #seq-play:hover { border-color: #ffb74d; }
+#tap-tempo:active, #seq-play:active { background: #444; }
+#seq-play.playing { background: #ff4444; border-color: #ff4444; }
+
+.seq-led {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ffb74d;
+  border-radius: 50%;
+  background: #111;
+  color: #ffb74d;
+  font-size: 0.7rem;
+  line-height: 16px;
+  text-align: center;
+  margin-left: 0.5rem;
+}
+.seq-led.lit { background: #ffb74d; box-shadow: 0 0 8px #ffb74d; }
+
 @media (max-width: 600px) {
   #waveform { width: 90vw; height: 80px; }
   .panel { padding: 0.75rem; margin: 1rem; }
   .row { gap: 0.6rem; }
   .row label { min-width: unset; }
+  .key-white { width: 34px; height: 110px; }
+  .key-black { width: 22px; height: 70px; margin-left: -11px; }
+  .seq-step { width: 20px; height: 20px; }
+}
+
+/* ===== TASTIERA 2 OTTAVE ===== */
+.keyboard {
+  margin: 1.5rem auto;
+  position: relative;
+  height: 160px;
+  user-select: none;
+  touch-action: none;
+}
+.keyboard-whites {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+.key-white {
+  width: 44px;
+  height: 150px;
+  background: #fff;
+  border: 1px solid #333;
+  border-bottom: 4px solid #111;
+  border-radius: 0 0 4px 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.key-white.active {
+  background: #ffb74d;
+  border-color: #ffb74d;
+}
+.key-white:active {
+  background: #ffe082;
+}
+.key-black {
+  position: absolute;
+  z-index: 2;
+  width: 28px;
+  height: 95px;
+  background: #111;
+  border: 1px solid #000;
+  border-bottom: 3px solid #000;
+  border-radius: 0 0 3px 3px;
+  cursor: pointer;
+  box-sizing: border-box;
+  margin-left: -14px;
+}
+.key-black.active {
+  background: #ffb74d;
+  border-color: #ffb74d;
+}
+.key-black:active {
+  background: #ff9800;
+}
+
+/* ===== STEP SEQUENCER ===== */
+.seq-steps {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.seq-step {
+  width: 26px;
+  height: 26px;
+  border: 2px solid #444;
+  border-radius: 6px;
+  background: #1a1a1a;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background 0.1s, box-shadow 0.1s;
+}
+.seq-step.active {
+  background: #ffb74d;
+  box-shadow: 0 0 10px #ffb74d;
+}
+.seq-step.drum-kick {
+  background: #ef5350;
+  box-shadow: 0 0 8px #ef5350;
+}
+.seq-step.drum-hats {
+  background: #26a69a;
+  box-shadow: 0 0 8px #26a69a;
+}
+.seq-step.drum-bass {
+  background: #ab47bc;
+  box-shadow: 0 0 8px #ab47bc;
+}
+.seq-step:active {
+  background: #ffe082;
+}
+.seq-led {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffb74d;
+  border-radius: 50%;
+  background: #111;
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 14px;
+  text-align: center;
+  color: #ffb74d;
+}
+.seq-led.lit {
+  background: #ffb74d;
+  box-shadow: 0 0 8px #ffb74d;
 }

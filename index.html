@@ -30,23 +30,58 @@
         <label>Cutoff <input type="range" id="filter-freq" min="40" max="2000" step="1" value="1000"></label>
         <label>Q <input type="range" id="filter-q" min="0.1" max="20" step="0.1" value="1"></label>
       </div>
-      <div class="row keys" aria-label="Tasti">
-        <button data-note="C4">Do</button>
-        <button data-note="D4">Re</button>
-        <button data-note="E4">Mi</button>
-        <button data-note="F4">Fa</button>
-        <button data-note="G4">Sol</button>
-        <button data-note="A4">La</button>
-        <button data-note="B4">Si</button>
-        <button data-note="C5">Do</button>
+      <div class="keyboard" aria-label="Tastiera 2 ottave">
+        <div class="keyboard-whites"></div>
+        <div class="keyboard-black"></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Step sequencer">
+      <div class="row">
+        <label>BPM <input type="number" id="bpm" min="40" max="240" step="1" value="120"></label>
+        <span id="led-clock" class="led amber off" title="Master Clock"></span>
+        <button type="button" id="tap-tempo">Tap Tempo</button>
+        <button type="button" id="seq-play">▶ Play</button>
+        <span id="led-seq" class="led green off" title="Sequencer"></span>
+        <span id="seq-step" class="seq-led">0</span>
+        <button type="button" id="export-pattern">Esporta Pattern</button>
+      </div>
+      <div class="row seq-steps" id="seq-steps"></div>
+      <div class="row">
+        <label>Onda <select id="seq-wave"><option value="sawtooth">Sawtooth</option><option value="square">Square</option><option value="sine">Sine</option><option value="triangle">Triangle</option></select></label>
+        <label>Durata step <input type="range" id="seq-gate" min="0.1" max="1" step="0.1" value="0.8"></label>
       </div>
     </section>
 
     <div class="controls" aria-label="Aggiungi suoni">
-      <button type="button" data-sound="kick">Kick</button>
-      <button type="button" data-sound="hats">Hats</button>
-      <button type="button" data-sound="bass">Bassi</button>
+      <div class="sound-group">
+        <button type="button" data-sound="kick">Kick</button>
+        <button type="button" data-loop="kick" class="loop">Loop</button>
+      </div>
+      <div class="sound-group">
+        <button type="button" data-sound="hats">Hats</button>
+        <button type="button" data-loop="hats" class="loop">Loop</button>
+      </div>
+      <div class="sound-group">
+        <button type="button" data-sound="bass">Bassi</button>
+        <button type="button" data-loop="bass" class="loop">Loop</button>
+      </div>
     </div>
+
+    <section class="panel" aria-label="Controlli drum machine">
+      <div class="row">
+        <label>Kick pitch <input type="range" id="drum-kick-pitch" min="40" max="400" step="1" value="150"></label>
+        <label>Kick decay <input type="range" id="drum-kick-decay" min="0.1" max="1.5" step="0.05" value="0.4"></label>
+      </div>
+      <div class="row">
+        <label>Hats pitch <input type="range" id="drum-hats-pitch" min="4000" max="12000" step="100" value="8000"></label>
+        <label>Hats decay <input type="range" id="drum-hats-decay" min="0.05" max="0.5" step="0.05" value="0.12"></label>
+      </div>
+      <div class="row">
+        <label>Bass pitch <input type="range" id="drum-bass-pitch" min="30" max="120" step="1" value="55"></label>
+        <label>Bass decay <input type="range" id="drum-bass-decay" min="0.1" max="1.5" step="0.05" value="0.3"></label>
+      </div>
+    </section>
   </main>
   <script src="script.js"></script>
 </body>
