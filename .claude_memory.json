@@ -1,0 +1,768 @@
+{
+  "projectName": "khorg",
+  "projectPath": "C:\\Users\\pietr\\OneDrive\\Desktop\\khorg",
+  "updatedAt": "2026-10-27T10:12:39.936Z",
+  "nodes": [
+    {
+      "id": "proj_step_1793095947223",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: L'utente ha scelto: **mantieni pattern r",
+      "value": "Eseguito: L'utente ha scelto: **mantieni pattern registrati**. Nessun prossimo chiarimento necessario.. File coinvolti: script.js",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T10:12:27.223Z",
+      "updatedAt": "2026-10-27T10:12:27.223Z"
+    },
+    {
+      "id": "proj_step_1793095573434",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: L'utente ha scelto l'**intonazione croma",
+      "value": "Eseguito: L'utente ha scelto l'**intonazione cromatica** (arrotondamento al semitono più vicino). Non serve un altro chiarimento: il deploy su Vercel è chiaro (file statici HTML/JS/CSS). Creo il piano e procedo.. File coinvolti: script.js, vercel.json, script.js, vercel.json",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_vercel_json",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_vercel_json",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T10:06:13.434Z",
+      "updatedAt": "2026-10-27T10:06:13.434Z"
+    },
+    {
+      "id": "proj_step_1793095319250",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Ciao! Sono Adam. Inizio leggendo i file ",
+      "value": "Eseguito: Ciao! Sono Adam. Inizio leggendo i file del progetto per capire lo stato reale del codice, come richiesto dal protocollo. Leggo index.html, script.js e style.css.. File coinvolti: ADAM_ENVELOPE_PLAN.md, script.js, style.css",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T10:01:59.250Z",
+      "updatedAt": "2026-10-27T10:01:59.250Z"
+    },
+    {
+      "id": "proj_step_1793094267991",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Il piano è già stato interamente eseguit",
+      "value": "Eseguito: Il piano è già stato interamente eseguito nel turno precedente e verificato (`cervello.js --controlla` → nessun problema; `verifica.js` → nessun errore JavaScript). Verifico comunque lo stato attuale sul disco per confermare che tutte le modifiche siano presenti.. File coinvolti: script.js, style.css",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T09:44:27.991Z",
+      "updatedAt": "2026-10-27T09:44:27.991Z"
+    },
+    {
+      "id": "proj_step_1793093436415",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Ricevuta. È una richiesta grande e artic",
+      "value": "Eseguito: Ricevuta. È una richiesta grande e articolata. Prima di scrivere codice, definisco un piano di implementazione a fasi (vertical slice per fasi), perché il vincolo di scrittura incrementale mi impedisce di generare tutto in un colpo. Creo la task board.. File coinvolti: script.js, index.html, style.css, index.html, script.js, style.css",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T09:30:36.415Z",
+      "updatedAt": "2026-10-27T09:30:36.415Z"
+    },
+    {
+      "id": "proj_step_1793092479228",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: L'utente vuole poter mandare in loop i s",
+      "value": "Eseguito: L'utente vuole poter mandare in loop i suoni (kick, hats, bass). Attualmente le funzioni `playKick`, `playHats`, `playBass` fanno partire il suono una sola volta e si fermano. Devo aggiungere:. File coinvolti: index.html, style.css, script.js, script.js",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T09:14:39.228Z",
+      "updatedAt": "2026-10-27T09:14:39.228Z"
+    },
+    {
+      "id": "proj_step_1793091317199",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Il sito Khorg è già completo e verificat",
+      "value": "Eseguito: Il sito Khorg è già completo e verificato. Non ci sono passi da eseguire: tutti e quattro i passi del piano sono stati portati a termine nel turno precedente.. File coinvolti: index.html, script.js, style.css",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T08:55:17.199Z",
+      "updatedAt": "2026-10-27T08:55:17.199Z"
+    },
+    {
+      "id": "proj_step_1793091065862",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Ho letto tutti i file e lo stato git. Ec",
+      "value": "Eseguito: Ho letto tutti i file e lo stato git. Ecco cosa vedo:. File coinvolti: index.html, index.html",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T08:51:05.862Z",
+      "updatedAt": "2026-10-27T08:51:05.862Z"
+    },
+    {
+      "id": "proj_step_1793087489212",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Ho letto i tre file. Il progetto è una p",
+      "value": "Eseguito: Ho letto i tre file. Il progetto è una pagina web \"Khorg\" molto essenziale: `index.html` con un titolo e una frase, `script.js` con un solo log, e `style.css` con stili base. L'utente chiede tre pulsanti per aggiungere kick, hats e bassi.. File coinvolti: index.html, script.js, style.css, index.html, script.js, style.css",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_index_html",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T07:51:29.212Z",
+      "updatedAt": "2026-10-27T07:51:29.212Z"
+    },
+    {
+      "id": "proj_step_1793086721918",
+      "scope": "project",
+      "type": "step",
+      "label": "Passo: Il progetto è vuoto (solo `.claude_memor",
+      "value": "Eseguito: Il progetto è vuoto (solo `.claude_memory.json`). L'istruzione per questo passo è chiara: scheletro minimo che si apre e si vede, niente di più. Procedo direttamente.. File coinvolti: script.js",
+      "tags": [
+        "passaggio",
+        "sviluppo",
+        "progresso"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_code_script_js",
+          "label": "ha modificato",
+          "strength": 0.85
+        },
+        {
+          "targetId": "proj_node_root",
+          "label": "avanzamento",
+          "strength": 0.7
+        }
+      ],
+      "createdAt": "2026-10-27T07:38:41.918Z",
+      "updatedAt": "2026-10-27T07:38:41.918Z"
+    },
+    {
+      "id": "proj_node_root",
+      "scope": "project",
+      "type": "data",
+      "label": "Progetto: khorg",
+      "value": "Cartella radice attiva: C:\\Users\\pietr\\OneDrive\\Desktop\\khorg",
+      "tags": [
+        "progetto",
+        "root"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_node_var_cwd",
+          "label": "percorso",
+          "strength": 1
+        },
+        {
+          "targetId": "proj_code_script_js",
+          "label": "include",
+          "strength": 0.8
+        },
+        {
+          "targetId": "proj_code_index_html",
+          "label": "include",
+          "strength": 0.8
+        },
+        {
+          "targetId": "proj_code_style_css",
+          "label": "include",
+          "strength": 0.8
+        },
+        {
+          "targetId": "proj_code_vercel_json",
+          "label": "include",
+          "strength": 0.8
+        }
+      ]
+    },
+    {
+      "id": "proj_node_var_cwd",
+      "scope": "project",
+      "type": "variable",
+      "label": "CWD: khorg",
+      "value": "C:\\Users\\pietr\\OneDrive\\Desktop\\khorg",
+      "tags": [
+        "variabile",
+        "path"
+      ],
+      "synapses": []
+    },
+    {
+      "id": "proj_node_step_init",
+      "scope": "project",
+      "type": "step",
+      "label": "Sessione di Lavoro Inizializzata",
+      "value": "Sessione pronta in C:\\Users\\pietr\\OneDrive\\Desktop\\khorg. Pronto per generare codice, gestire passaggi e dati.",
+      "tags": [
+        "passaggio",
+        "avvio"
+      ],
+      "synapses": [
+        {
+          "targetId": "proj_node_root",
+          "label": "associato a",
+          "strength": 0.9
+        }
+      ]
+    },
+    {
+      "id": "proj_code_script_js",
+      "scope": "project",
+      "type": "data",
+      "label": "script.js",
+      "value": "[script.js] Script JavaScript/TypeScript: 765 righe. Metodi (42): ensureAudio, startAudio, envGain, playKick, playHats, playBass, envGainNode, filterEnvNode, startVoice, stopVoice.... Ultima modifica: 11:12:27",
+      "tags": [
+        "codice",
+        "js",
+        "progetto",
+        "funzioni"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "script.js",
+        "totalLines": 765,
+        "language": "js"
+      },
+      "synapses": [
+        {
+          "targetId": "proj_node_root",
+          "label": "script di",
+          "strength": 0.9
+        }
+      ],
+      "createdAt": "2026-10-27T07:38:29.601Z",
+      "updatedAt": "2026-10-27T10:12:27.223Z"
+    },
+    {
+      "id": "scan_mappa_del_codice",
+      "scope": "project",
+      "type": "data",
+      "label": "Mappa del codice",
+      "value": "- index.html (html, 89 righe) -> id: waveform, wave-type, freq, master-vol, env-attack, env-decay, env-sustain, env-release, filter-type, filter-freq, filter-q, bpm\n- script.js (js, 765 righe) -> funzioni: ensureAudio, startAudio, envGain, playKick, playHats, playBass, envGainNode, filterEnvNode, startVoice, stopVoice, stopAllVoices, initFx | variabili: ctxState, synthState, drumState, sounds, loopState, WAVE_TYPES, activeVoices, synthVoiceState, fxState, NOTE_NAMES, NOTE_FREQS, BLACK_AFTER | usa id: waveform, seq-steps, seq-step, seq-play, bpm, seq-wave, seq-gate, drum-kick-pitch, drum-kick-decay, drum-hats-pitch, drum-hats-decay, drum-bass-pitch\n- style.css (css, 399 righe)\nCollegamenti fra file:\n  script.js --[usa #waveform]--> index.html\n  script.js --[usa #seq-steps]--> index.html\n  script.js --[usa #seq-step]--> index.html\n  script.js --[usa #seq-play]--> index.html\n  script.js --[usa #bpm]--> index.html\n  script.js --[usa #seq-wave]--> index.html\n  script.js --[usa #seq-gate]--> index.html\n  script.js --[usa #drum-kick-pitch]--> index.html\n  script.js --[usa #drum-kick-decay]--> index.html\n  script.js --[usa #drum-hats-pitch]--> index.html\n  script.js --[usa #drum-hats-decay]--> index.html\n  script.js --[usa #drum-bass-pitch]--> index.html\n  script.js --[usa #drum-bass-decay]--> index.html\n  script.js --[usa #led-clock]--> index.html\n  script.js --[usa #led-seq]--> index.html\n  script.js --[usa #export-pattern]--> index.html\n  script.js --[usa #wave-type]--> index.html\n  script.js --[usa #freq]--> index.html\n  script.js --[usa #master-vol]--> index.html\n  script.js --[usa #env-attack]--> index.html\n  script.js --[usa #env-decay]--> index.html\n  script.js --[usa #env-sustain]--> index.html\n  script.js --[usa #env-release]--> index.html\n  script.js --[usa #filter-type]--> index.html\n  script.js --[usa #filter-freq]--> index.html\n  script.js --[usa #filter-q]--> index.html\n  index.html --[include]--> style.css\n  index.html --[include]--> script.js",
+      "tags": [
+        "analisi",
+        "mappa"
+      ],
+      "synapses": [],
+      "updatedAt": "2026-10-27T10:12:39.933Z"
+    },
+    {
+      "id": "proj_code_index_html",
+      "scope": "project",
+      "type": "data",
+      "label": "index.html",
+      "value": "[index.html] Interfaccia HTML: 89 righe. Campi/ID: waveform, wave-type, freq, master-vol, env-attack, env-decay, env-sustain, env-release. Ultima modifica: 10:30:36",
+      "tags": [
+        "codice",
+        "html",
+        "progetto"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "index.html",
+        "totalLines": 89,
+        "language": "html"
+      },
+      "synapses": [
+        {
+          "targetId": "proj_node_root",
+          "label": "script di",
+          "strength": 0.9
+        }
+      ],
+      "createdAt": "2026-10-27T07:50:01.792Z",
+      "updatedAt": "2026-10-27T09:30:36.414Z"
+    },
+    {
+      "id": "proj_code_style_css",
+      "scope": "project",
+      "type": "data",
+      "label": "style.css",
+      "value": "[style.css] Fogli di stile CSS: 399 righe. Ultima modifica: 11:01:59",
+      "tags": [
+        "codice",
+        "css",
+        "progetto"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "style.css",
+        "totalLines": 399,
+        "language": "css"
+      },
+      "synapses": [
+        {
+          "targetId": "proj_node_root",
+          "label": "script di",
+          "strength": 0.9
+        }
+      ],
+      "createdAt": "2026-10-27T07:50:12.517Z",
+      "updatedAt": "2026-10-27T10:01:59.249Z"
+    },
+    {
+      "id": "proj_code_vercel_json",
+      "scope": "project",
+      "type": "data",
+      "label": "vercel.json",
+      "value": "[vercel.json] Modulo di codice: 11 righe. Ultima modifica: 11:06:13",
+      "tags": [
+        "codice",
+        "json",
+        "progetto"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "vercel.json",
+        "totalLines": 11,
+        "language": "json"
+      },
+      "synapses": [
+        {
+          "targetId": "proj_node_root",
+          "label": "script di",
+          "strength": 0.9
+        }
+      ],
+      "createdAt": "2026-10-27T10:04:48.690Z",
+      "updatedAt": "2026-10-27T10:06:13.434Z"
+    },
+    {
+      "id": "mappa_index_html",
+      "scope": "project",
+      "type": "data",
+      "label": "index.html",
+      "value": "html, 89 righe. Id dichiarati: waveform, wave-type, freq, master-vol, env-attack, env-decay, env-sustain, env-release, filter-type, filter-freq, filter-q, bpm, led-clock, tap-tempo, seq-play",
+      "tags": [
+        "mappa-codice",
+        "html"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "index.html",
+        "totalLines": 89,
+        "language": "html"
+      },
+      "synapses": [
+        {
+          "targetId": "mappa_style_css",
+          "label": "include",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_script_js",
+          "label": "include",
+          "strength": 0.8
+        }
+      ],
+      "updatedAt": "2026-10-27T10:12:39.936Z"
+    },
+    {
+      "id": "mappa_script_js",
+      "scope": "project",
+      "type": "data",
+      "label": "script.js",
+      "value": "js, 765 righe. Funzioni: ensureAudio, startAudio, envGain, playKick, playHats, playBass, envGainNode, filterEnvNode, startVoice, stopVoice, stopAllVoices, initFx, makeDistortionCurve, makeImpulseResponse, startSynthVoice. Variabili: ctxState, synthState, drumState, sounds, loopState, WAVE_TYPES, activeVoices, synthVoiceState, fxState, NOTE_NAMES, NOTE_FREQS, BLACK_AFTER, SEQ_STEPS, SEQ_BARS, bars. Id usati: waveform, seq-steps, seq-step, seq-play, bpm, seq-wave, seq-gate, drum-kick-pitch, drum-kick-decay, drum-hats-pitch, drum-hats-decay, drum-bass-pitch, drum-bass-decay, led-clock, led-seq",
+      "tags": [
+        "mappa-codice",
+        "js"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "script.js",
+        "totalLines": 765,
+        "language": "js"
+      },
+      "synapses": [
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #waveform",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #seq-steps",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #seq-step",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #seq-play",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #bpm",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #seq-wave",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #seq-gate",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #drum-kick-pitch",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #drum-kick-decay",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #drum-hats-pitch",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #drum-hats-decay",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #drum-bass-pitch",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #drum-bass-decay",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #led-clock",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #led-seq",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #export-pattern",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #wave-type",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #freq",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #master-vol",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #env-attack",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #env-decay",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #env-sustain",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #env-release",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #filter-type",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #filter-freq",
+          "strength": 0.8
+        },
+        {
+          "targetId": "mappa_index_html",
+          "label": "usa #filter-q",
+          "strength": 0.8
+        }
+      ],
+      "updatedAt": "2026-10-27T10:12:39.936Z"
+    },
+    {
+      "id": "mappa_style_css",
+      "scope": "project",
+      "type": "data",
+      "label": "style.css",
+      "value": "css, 399 righe. Nessun simbolo di primo livello.",
+      "tags": [
+        "mappa-codice",
+        "css"
+      ],
+      "locator": {
+        "version": 1,
+        "kind": "source",
+        "file": "style.css",
+        "totalLines": 399,
+        "language": "css"
+      },
+      "synapses": [],
+      "updatedAt": "2026-10-27T10:12:39.936Z"
+    }
+  ]
+}
