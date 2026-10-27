@@ -341,6 +341,44 @@ main {
 .seq-step:active {
   background: #ffe082;
 }
+
+/* Timeline a blocchi (16 ottave) stile FL Studio */
+.seq-bar {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  background: #222;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.seq-bar.active {
+  border: 1px solid #ffb74d;
+  background: #2a2a2a;
+  box-shadow: 0 0 15px rgba(255, 183, 77, 0.2);
+}
+.seq-bar:not(.active) {
+  opacity: 0.45;
+}
+
+/* Passo in registrazione (melodia layer) */
+.seq-step.record {
+  background: #00e676;
+  box-shadow: 0 0 10px #00e676;
+}
+.seq-step.record.drum-kick { background: #ef5350; box-shadow: 0 0 8px #ef5350; }
+.seq-step.record.drum-hats { background: #26a69a; box-shadow: 0 0 8px #26a69a; }
+.seq-step.record.drum-bass { background: #ab47bc; box-shadow: 0 0 8px #ab47bc; }
+
+/* Playhead attivo sul passo corrente */
+.seq-step.playing {
+  outline: 2px solid #ffb74d;
+  outline-offset: -2px;
+  box-shadow: inset 0 0 6px rgba(255, 183, 77, 0.4);
+}
+
 .seq-led {
   display: inline-block;
   width: 14px;

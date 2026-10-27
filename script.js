@@ -318,12 +318,16 @@ document.querySelectorAll('.controls button[data-loop]').forEach((button) => {
     button.classList.toggle('active', loopState[sound]);
     if (loopState[sound]) {
       startAudio();
-      // Mette il suono in tutti gli step della timeline (sequencer)
-      for (let i = 0; i < SEQ_STEPS; i++) drumPatterns[sound][i] = 1;
+      // Mette il suono in tutti gli step della barra corrente
+      const dp = currentBar().drumPatterns;
+      for (let i = 0; i < SEQ_STEPS; i++) dp[sound][i] = 1;
+      drawBarSteps(currentBarIndex);
       sounds[sound](ensureAudio());
     } else {
-      // Toglie il suono da tutti gli step della timeline
-      for (let i = 0; i < SEQ_STEPS; i++) drumPatterns[sound][i] = 0;
+      // Toglie il suono da tutti gli step della barra corrente
+      const dp = currentBar().drumPatterns;
+      for (let i = 0; i < SEQ_STEPS; i++) dp[sound][i] = 0;
+      drawBarSteps(currentBarIndex);
     }
   });
 });
@@ -341,6 +345,14 @@ const NOTE_FREQS = {
   'C5': 523.25,
 };
 const BLACK_AFTER = new Set([0, 1, 3, 4, 5]); // indici di bianco dopo cui c'è un nero
+
+// Intonazione cromatica: arrotonda una frequenza al semitono più vicino (A4 = 440 Hz)
+// così ogni nota registrata, anche se stonata, viene intonata automaticamente.
+function quantizeToSemitone(freq) {
+  if (!freq || freq <= 0) return 0;
+  const n = Math.round(12 * Math.log2(freq / 440));
+  return 440 * Math.pow(2, n / 12);
+}
 
 function buildKeyboard() {
   const whites = document.querySelector('.keyboard-whites');
@@ -363,6 +375,7 @@ function buildKeyboard() {
       startAudio();
       synthVoiceState.freq = freq;
       startSynthVoice(freq);
+      recordStepNote(freq);
     });
     white.addEventListener('mouseup', () => white.classList.remove('active'));
     white.addEventListener('mouseleave', () => white.classList.remove('active'));
@@ -372,6 +385,7 @@ function buildKeyboard() {
       startAudio();
       synthVoiceState.freq = freq;
       startSynthVoice(freq);
+      recordStepNote(freq);
     }, { passive: false });
     white.addEventListener('touchend', () => white.classList.remove('active'));
     whites.appendChild(white);
@@ -389,6 +403,7 @@ function buildKeyboard() {
         startAudio();
         synthVoiceState.freq = blackFreq;
         startSynthVoice(blackFreq);
+        recordStepNote(blackFreq);
       });
       black.addEventListener('mouseup', () => black.classList.remove('active'));
       black.addEventListener('mouseleave', () => black.classList.remove('active'));
@@ -398,6 +413,7 @@ function buildKeyboard() {
         startAudio();
         synthVoiceState.freq = blackFreq;
         startSynthVoice(blackFreq);
+        recordStepNote(blackFreq);
       }, { passive: false });
       black.addEventListener('touchend', () => black.classList.remove('active'));
       blacks.appendChild(black);
@@ -419,6 +435,7 @@ function buildKeyboard() {
     startAudio();
     synthVoiceState.freq = NOTE_FREQS['C5'];
     startSynthVoice(NOTE_FREQS['C5']);
+    recordStepNote(NOTE_FREQS['C5']);
   });
   c5.addEventListener('mouseup', () => c5.classList.remove('active'));
   c5.addEventListener('mouseleave', () => c5.classList.remove('active'));
@@ -440,12 +457,52 @@ buildKeyboard();
 // =====================================================================
 
 const SEQ_STEPS = 16;
-const seqPattern = new Array(SEQ_STEPS).fill(0); // 0 = spento, 1 = acceso
-const drumPatterns = {
-  kick: new Array(SEQ_STEPS).fill(0),
-  hats: new Array(SEQ_STEPS).fill(0),
-  bass: new Array(SEQ_STEPS).fill(0),
-};
+const SEQ_BARS = 16; // 16 ottave/blocchi stile FL Studio, solo per la diretta
+
+function newBar() {
+  return {
+    seqPattern: new Array(SEQ_STEPS).fill(0), // 0 = spento, oppure frequenza registrata (layer melodia)
+    drumPatterns: {
+      kick: new Array(SEQ_STEPS).fill(0),
+      hats: new Array(SEQ_STEPS).fill(0),
+      bass: new Array(SEQ_STEPS).fill(0),
+    },
+  };
+}
+
+const bars = Array.from({ length: SEQ_BARS }, newBar);
+let currentBarIndex = 0; // barra corrente (ottava attiva e modificabile)
+
+function currentBar() {
+  return bars[currentBarIndex];
+}
+
+// Riferimenti alla barra corrente (aggiornati a ogni cambio di barra)
+let seqPattern = currentBar().seqPattern;
+let drumPatterns = currentBar().drumPatterns;
+
+function switchBar(newIndex) {
+  currentBarIndex = newIndex;
+  seqPattern = currentBar().seqPattern;
+  drumPatterns = currentBar().drumPatterns;
+}
+
+function clearCurrentBar() {
+  const bar = currentBar();
+  bar.seqPattern.fill(0);
+  bar.drumPatterns.kick.fill(0);
+  bar.drumPatterns.hats.fill(0);
+  bar.drumPatterns.bass.fill(0);
+}
+
+// Registra la nota premuta nello step corrente della barra corrente (layer melodia live)
+function recordStepNote(freq) {
+  if (!seqIsPlaying) return;
+  const bar = currentBar();
+  bar.seqPattern[seqStepIndex] = quantizeToSemitone(freq);
+  drawBarSteps(currentBarIndex);
+}
+
 let seqIsPlaying = false;
 let seqStepIndex = 0;
 let seqInterval = null;
@@ -460,25 +517,61 @@ const seqGateInp = document.getElementById('seq-gate');
 function buildSeqSteps() {
   if (!seqStepsEl) return;
   seqStepsEl.innerHTML = '';
-  for (let i = 0; i < SEQ_STEPS; i++) {
-    const step = document.createElement('button');
-    step.type = 'button';
-    step.className = 'seq-step';
-    step.dataset.index = i;
-    step.addEventListener('click', () => {
-      seqPattern[i] = seqPattern[i] ? 0 : 1;
-      step.classList.toggle('active', seqPattern[i] === 1);
-    });
-    updateStepDrumClasses(step, i);
-    seqStepsEl.appendChild(step);
+  for (let b = 0; b < SEQ_BARS; b++) {
+    const barEl = document.createElement('div');
+    barEl.className = 'seq-bar';
+    barEl.dataset.bar = b;
+    if (b === currentBarIndex) barEl.classList.add('active');
+    for (let i = 0; i < SEQ_STEPS; i++) {
+      const step = document.createElement('button');
+      step.type = 'button';
+      step.className = 'seq-step';
+      step.dataset.bar = b;
+      step.dataset.index = i;
+      step.addEventListener('click', () => {
+        if (b !== currentBarIndex) return; // si può modificare solo la barra corrente
+        const val = seqPattern[i] ? 0 : 1;
+        seqPattern[i] = val;
+        step.classList.toggle('active', val === 1);
+        updateStepDrumClasses(step, i);
+      });
+      updateStepDrumClasses(step, i);
+      barEl.appendChild(step);
+    }
+    seqStepsEl.appendChild(barEl);
   }
 }
 buildSeqSteps();
 
+function activateBar(barIndex) {
+  // Attiva visivamente solo il blocco corrente
+  document.querySelectorAll('.seq-bar').forEach((barEl, b) => {
+    barEl.classList.toggle('active', b === barIndex);
+  });
+  // Aggiorna i riferimenti alla barra corrente
+  seqPattern = currentBar().seqPattern;
+  drumPatterns = currentBar().drumPatterns;
+  // Disegna gli step della barra corrente con lo stato salvato
+  drawBarSteps(barIndex);
+}
+
+function drawBarSteps(barIndex) {
+  const barEl = document.querySelector(`.seq-bar[data-bar="${barIndex}"]`);
+  if (!barEl) return;
+  const bar = bars[barIndex];
+  const steps = barEl.querySelectorAll('.seq-step');
+  steps.forEach((step, i) => {
+    const noteVal = bar.seqPattern[i];
+    step.classList.toggle('active', noteVal !== 0);
+    updateStepDrumClasses(step, i);
+  });
+}
+
 function updateStepDrumClasses(step, index) {
-  step.classList.toggle('drum-kick', drumPatterns.kick[index] === 1);
-  step.classList.toggle('drum-hats', drumPatterns.hats[index] === 1);
-  step.classList.toggle('drum-bass', drumPatterns.bass[index] === 1);
+  const dp = currentBar().drumPatterns;
+  step.classList.toggle('drum-kick', dp.kick[index] === 1);
+  step.classList.toggle('drum-hats', dp.hats[index] === 1);
+  step.classList.toggle('drum-bass', dp.bass[index] === 1);
 }
 
 function updateSeqLed(index) {
@@ -498,31 +591,47 @@ function seqStepDurationMs() {
 }
 
 function playSeqStep(index) {
-  const step = seqStepsEl.children[index];
+  const barEl = document.querySelector(`.seq-bar[data-bar="${currentBarIndex}"]`);
+  const step = barEl ? barEl.querySelector(`.seq-step[data-index="${index}"]`) : null;
   if (step) {
-    step.classList.add('active');
-    setTimeout(() => step.classList.remove('active'), 120);
+    step.classList.add('playing');
+    step.classList.toggle('record', seqPattern[index] !== 0);
+    setTimeout(() => {
+      step.classList.remove('playing');
+      step.classList.remove('record');
+    }, 120);
   }
-  if (seqPattern[index]) {
+  const noteVal = seqPattern[index];
+  if (noteVal) {
     startAudio();
     const wave = (seqWaveSel && seqWaveSel.value) || 'sawtooth';
-    const baseFreqs = [220, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
-    const freq = baseFreqs[index % baseFreqs.length];
+    // Se è un numero > 1 è una frequenza registrata (layer melodia), altrimenti usa la scala base
+    const freq = typeof noteVal === 'number' && noteVal > 1 ? noteVal : (() => {
+      const baseFreqs = [220, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00];
+      return baseFreqs[index % baseFreqs.length];
+    })();
     synthVoiceState.oscType = wave;
     startSynthVoice(freq);
   }
   const ctx = ensureAudio();
-  if (drumPatterns.kick[index]) playKick(ctx);
-  if (drumPatterns.hats[index]) playHats(ctx);
-  if (drumPatterns.bass[index]) playBass(ctx);
+  const dp = currentBar().drumPatterns;
+  if (dp.kick[index]) playKick(ctx);
+  if (dp.hats[index]) playHats(ctx);
+  if (dp.bass[index]) playBass(ctx);
 }
 
 function seqTick() {
   playSeqStep(seqStepIndex);
   updateSeqLed(seqStepIndex);
-  seqStepIndex = (seqStepIndex + 1) % SEQ_STEPS;
+  seqStepIndex++;
+  if (seqStepIndex >= SEQ_STEPS) {
+    // Fine barra: passa alla successiva senza cancellare i pattern registrati
+    const nextBar = (currentBarIndex + 1) % SEQ_BARS;
+    switchBar(nextBar);
+    activateBar(nextBar);
+    seqStepIndex = 0;
+  }
 }
-
 function toggleSeq() {
   if (seqIsPlaying) {
     stopSeq();
